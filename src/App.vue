@@ -12,6 +12,7 @@
 }
 :root {
   --main-color: #131118;
+  --secound-color: #eee;
 }
 nav {
   padding: 30px;
