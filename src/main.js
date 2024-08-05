@@ -13,6 +13,10 @@ const vuetify = createVuetify({
   directives,
 });
 // Mdi_Fonts
+import { Chart, registerables } from "chart.js";
+
+Chart.register(...registerables);
+
 import "@mdi/font/css/materialdesignicons.css";
 
 createApp(App).use(router).use(vuetify).mount("#app");
