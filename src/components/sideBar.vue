@@ -1,21 +1,23 @@
 <template>
   <!-- navigation-drawer  -->
   <v-layout>
-    <v-navigation-drawer rail permanent>
-      <v-list nav class="pt-16 pa-5 px-2">
+    <v-navigation-drawer
+      expand-on-hover
+      rail
+      style="background-color: var(--main-color); color: white"
+    >
+      <v-list density="compact" nav>
         <v-list-item
           link
           @click="$router.push('/')"
           prepend-icon="mdi-home-outline"
-        >
+          >Dashbourd
         </v-list-item>
-
-        <v-list-item link prepend-icon="mdi-chart-pie-outline"> </v-list-item>
         <v-list-item
           link
-          prepend-icon="mdi-cog-outline"
-          @click="$router.push('/Settings_Admin')"
-        >
+          prepend-icon="mdi-invoice-list-outline"
+          @click="$router.push('/produtsView')"
+          >Produts
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
