@@ -1,5 +1,6 @@
 <template>
   <!-- navigation-drawer  -->
+  <router-link to="/products"> home </router-link>
   <v-layout>
     <v-navigation-drawer
       expand-on-hover
