@@ -6,14 +6,9 @@
         <sideBar />
       </v-col>
 
-      <!-- Main Content -->
-      <v-col cols="12" md="7" lg="10">
-        <v-row>
-          <!-- addProductsTable Section -->
-          <v-col cols="12">
-            <addProductsTable />
-          </v-col>
-        </v-row>
+      <!-- addProductsTable Section -->
+      <v-col cols="12" class="mt-16">
+        <addProductsTable />
       </v-col>
     </v-row>
   </v-container>

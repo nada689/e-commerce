@@ -3,7 +3,7 @@
   <v-col cols="12" md="3" lg="2">
     <sideBar />
   </v-col>
-  <v-row class="ml-5">
+  <v-row class="ml-5 mt-5">
     <v-col cols="12">
       <information-web />
     </v-col>
