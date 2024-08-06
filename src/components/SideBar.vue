@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 /* تخصيص الشريط الجانبي ليتوسع عند مرور الماوس */
 .v-navigation-drawer {
   transition: width 0.3s ease;

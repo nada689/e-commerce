@@ -7,7 +7,7 @@
         <v-col cols="12" md="3" class="hidden-sm-and-down">
           <SidebarFilter />
         </v-col>
-        <v-col cols="12" md="9">
+        <v-col cols="12" md="9" class="mt-16">
           <v-row>
             <!-- Sidebar Filter as a drawer for smaller screens -->
             <v-col cols="12" class="d-flex d-md-none">
