@@ -32,17 +32,17 @@
     <v-card width="100%" class="popup">
       <div class="d-flex justify-space-between align-center title">
         <div style="color: var(--main-color)">Add Product</div>
-        <v-btn icon="mdi-close" @click="closeDialog"></v-btn>
+        <v-btn icon="mdi-close" @click="CloseDialog"></v-btn>
       </div>
       <!-- Pass the close-dialog event from the form to the parent component -->
-      <addProductsForm @close-dialog="closeDialog" />
+      <ProductsForm @CloseDialog="CloseDialog" />
     </v-card>
   </v-dialog>
 </template>
 <script>
-import addProductsForm from "@/components/addProductsForm.vue";
+import ProductsForm from "@/components/AddProducts/ProductsForm.vue";
 export default {
-  components: { addProductsForm },
+  components: { ProductsForm },
   data() {
     return {
       Orders: [],

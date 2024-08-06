@@ -15,14 +15,14 @@
       <v-list density="compact" nav>
         <v-list-item
           link
-          @click="$router.push('/about')"
+          @click="$router.push('/dashboard')"
           prepend-icon="mdi-home-outline"
-          >Dashbourd
+          >Dashboard
         </v-list-item>
         <v-list-item
           link
           prepend-icon="mdi-invoice-list-outline"
-          @click="$router.push('/AddProducts')"
+          @click="$router.push('/add-products')"
           >Add Produts
         </v-list-item>
       </v-list>

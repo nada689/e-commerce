@@ -1,7 +1,7 @@
 <template>
   <!-- Sidebar -->
   <v-col cols="12" md="3" lg="2">
-    <sideBar />
+    <SideBar />
   </v-col>
   <v-row class="ml-5 mt-5">
     <v-col cols="12">
@@ -24,37 +24,37 @@
     </v-col>
     <!-- Bestsellers Section -->
     <v-col cols="12">
-      <bestSellers :bestsellers="bestsellers" />
+      <BestSellers :BestSellers="BestSellers" />
     </v-col>
 
     <!-- Latest Orders Section -->
     <v-col cols="12">
-      <lastOrders :latestOrders="latestOrders" />
+      <LastOrders :LatestOrders="LatestOrders" />
     </v-col>
   </v-row>
 </template>
 
 <script>
-import AdvanceReport from "../components/AdvanceReport.vue";
-import InformationWeb from "../components/InformationWeb.vue";
-import RevenueByDevice from "../components/RevenueByDevice.vue";
-import Traffic from "../components/TrafficByDevice.vue";
-import bestSellers from "@/components/bestSellers.vue";
-import lastOrders from "@/components/lastOrders.vue";
-import sideBar from "@/components/sideBar.vue";
+import AdvanceReport from "../components/dashboard/AdvanceReport.vue";
+import InformationWeb from "../components/dashboard/InformationWeb.vue";
+import RevenueByDevice from "../components/dashboard/RevenueByDevice.vue";
+import Traffic from "../components/dashboard/TrafficByDevice.vue";
+import BestSellers from "../components/dashboard/BestSellers.vue";
+import LastOrders from "../components/dashboard/LastOrders.vue";
+import SideBar from "../components/SideBar.vue";
 export default {
   components: {
     AdvanceReport,
     RevenueByDevice,
     Traffic,
     InformationWeb,
-    bestSellers,
-    lastOrders,
-    sideBar,
+    BestSellers,
+    LastOrders,
+    SideBar,
   },
   data() {
     return {
-      bestsellers: [
+      Bestsellers: [
         {
           product: "Deco accessory",
           price: "$21.19",
@@ -70,7 +70,7 @@ export default {
           profit: 10325.47,
         },
       ],
-      latestOrders: [
+      LatestOrders: [
         {
           products: "Analog Table Clock",
           qty: 2,
