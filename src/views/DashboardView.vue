@@ -1,8 +1,4 @@
 <template>
-  <!-- Sidebar -->
-  <v-col cols="12" md="3" lg="2">
-    <SideBar />
-  </v-col>
   <v-row class="ml-5 mt-5">
     <v-col cols="12">
       <information-web />
@@ -41,7 +37,6 @@ import RevenueByDevice from "../components/dashboard/RevenueByDevice.vue";
 import Traffic from "../components/dashboard/TrafficByDevice.vue";
 import BestSellers from "../components/dashboard/BestSellers.vue";
 import LastOrders from "../components/dashboard/LastOrders.vue";
-import SideBar from "../components/SideBar.vue";
 export default {
   components: {
     AdvanceReport,
@@ -50,11 +45,10 @@ export default {
     InformationWeb,
     BestSellers,
     LastOrders,
-    SideBar,
   },
   data() {
     return {
-      Bestsellers: [
+      BestSellers: [
         {
           product: "Deco accessory",
           price: "$21.19",

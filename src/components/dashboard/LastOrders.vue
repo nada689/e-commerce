@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-2" style="width: 95%; margin: auto">
+  <v-card class="mt-2" style="width: 98%; margin: auto">
     <div class="d-flex px-5 pt-2">
       <p style="font-size: 20px !important">Latest Orders</p>
       <v-spacer></v-spacer>
@@ -19,7 +19,7 @@
           </tr>
         </thead>
         <tbody style="text-align: start !important">
-          <tr v-for="order in latestOrders" :key="order.products">
+          <tr v-for="order in LatestOrders" :key="order.products">
             <td>
               <v-avatar color="grey" size="x-small"
                 ><v-icon icon="mdi-chair-rolling"></v-icon
@@ -46,7 +46,7 @@
 <script>
 export default {
   props: {
-    latestOrders: {
+    LatestOrders: {
       type: Array,
       required: true,
     },

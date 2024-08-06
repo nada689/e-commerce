@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-2" style="width: 95%; margin: auto">
+  <v-card class="mt-2" style="width: 98%; margin: auto">
     <div class="d-flex px-5 pt-2">
       <p style="font-size: 20px !important">Bestsellers</p>
       <v-spacer></v-spacer>
@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody style="text-align: start !important">
-          <tr v-for="item in bestsellers" :key="item.product">
+          <tr v-for="item in BestSellers" :key="item.product">
             <td>{{ item.product }}</td>
             <td>{{ item.price }}</td>
             <td>{{ item.sold }}</td>
@@ -31,7 +31,7 @@
 <script>
 export default {
   props: {
-    bestsellers: {
+    BestSellers: {
       type: Array,
       required: true,
     },
