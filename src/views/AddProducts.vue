@@ -3,22 +3,22 @@
     <v-row>
       <!-- Sidebar -->
       <v-col cols="12" md="3" lg="2">
-        <sideBar />
+        <SideBar />
       </v-col>
 
-      <!-- addProductsTable Section -->
+      <!--ProductsTable Section -->
       <v-col cols="12" class="mt-16">
-        <addProductsTable />
+        <ProductsTable />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import addProductsTable from "@/components/addProductsTable.vue";
-import sideBar from "@/components/sideBar.vue";
+import ProductsTable from "../components/AddProducts/ProductsTable.vue";
+import SideBar from "@/components/SideBar.vue";
 export default {
-  components: { addProductsTable, sideBar },
+  components: { ProductsTable, SideBar },
 };
 </script>
 

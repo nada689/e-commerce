@@ -29,7 +29,7 @@
             <v-btn text>Our Story</v-btn>
             <v-btn text>Blog</v-btn>
             <v-btn text>Contact Us</v-btn>
-            <v-btn @click="$router.push('/about')">Admin Dashboard</v-btn>
+            <v-btn @click="$router.push('/dashboard')">Admin Dashboard</v-btn>
           </v-col>
 
           <!-- Icons and Login button -->
@@ -68,7 +68,7 @@
           <v-list-item-title>Contact Us</v-list-item-title>
         </v-list-item>
         <v-list-item link>
-          <v-list-item-title @click="$router.push('/about')"
+          <v-list-item-title @click="$router.push('/dashboard')"
             >Admin Dashboard</v-list-item-title
           >
         </v-list-item>
