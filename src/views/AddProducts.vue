@@ -13,11 +13,6 @@
           <v-col cols="12">
             <addProductsTable />
           </v-col>
-
-          <!-- Sales Forecast Section 
-          <v-col cols="12" md="6">
-            <salesForecast :salesForecast="salesForecast" />
-          </v-col>-->
         </v-row>
       </v-col>
     </v-row>
