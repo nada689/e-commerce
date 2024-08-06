@@ -103,7 +103,7 @@ export default {
 
       // Reset form and close dialog
       this.resetForm();
-      this.$emit("close-dialog"); // Emit event to close dialog in parent
+      this.$emit("CloseDialog"); // Emit event to close dialog in parent
       this.loading = false;
     },
     resetForm() {
