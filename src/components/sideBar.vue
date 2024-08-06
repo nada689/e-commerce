@@ -10,7 +10,7 @@
       <v-list density="compact" nav>
         <v-list-item
           link
-          @click="$router.push('/')"
+          @click="$router.push('/about')"
           prepend-icon="mdi-home-outline"
           >Dashbourd
         </v-list-item>
