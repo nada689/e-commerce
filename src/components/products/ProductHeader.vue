@@ -47,9 +47,7 @@
         </v-row>
       </v-container>
     </v-app-bar>
-  </v-layout>
-  <v-layout
-    ><!-- Navigation drawer for smaller screens -->
+    <!-- Navigation drawer for smaller screens -->
     <v-navigation-drawer v-model="drawer" temporary absolute>
       <v-list>
         <v-list-item>
@@ -141,6 +139,11 @@ export default {
   }
   .d-flex {
     display: flex !important;
+  }
+}
+@media (max-width: 725px) {
+  .logo {
+    width: 100px !important;
   }
 }
 </style>
