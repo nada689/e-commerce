@@ -90,10 +90,11 @@ export default {
 :root {
   --main-color: #131118;
   --secound-color: #eee;
+  --transition-time: 0.5s;
 }
 
 .v-navigation-drawer {
-  transition: width 0.5s ease-in-out;
+  transition: width var(--transition-time) ease;
 }
 
 .v-navigation-drawer:hover {
