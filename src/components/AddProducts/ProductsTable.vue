@@ -1,9 +1,16 @@
 <template>
   <v-card class="mt-2">
-    <div class="d-flex px-5 pt-2">
+    <div
+      class="d-flex px-5 pt-2 pb-2"
+      style="background-color: var(--secound-color) !important"
+    >
       <p style="font-size: 20px !important">Orders</p>
       <v-spacer></v-spacer>
-      <v-btn variant="text" append-icon="mdi-plus" @click="dialog = true"
+      <v-btn
+        variant="text"
+        append-icon="mdi-plus"
+        @click="dialog = true"
+        style="background-color: white !important"
         >add
       </v-btn>
     </div>
@@ -49,7 +56,12 @@ export default {
       dialog: false,
       sortBy: ["date", "asc"],
       headers: [
-        { title: "ID", align: "start", key: "id", sortable: false },
+        {
+          title: "ID",
+          align: "start",
+          key: "id",
+          sortable: false,
+        },
         { title: "Product Name", align: "start", key: "name" }, // Changed from "products" to "name"
         { title: "Price", align: "start", key: "price" },
         {
