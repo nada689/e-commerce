@@ -3,7 +3,11 @@
 
   <v-app v-else>
     <!--Menu icon  -->
-    <v-app-bar app color="white" dark>
+    <v-app-bar
+      app
+      style="background-color: var(--main-color); color: white"
+      dark
+    >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{ selectedItem }}</v-toolbar-title>
     </v-app-bar>
@@ -13,7 +17,7 @@
       v-model="drawer"
       :permanent="!isMobile"
       app
-      color="white"
+      style="background-color: var(--main-color); color: white"
       dark
     >
       <v-list dense>
@@ -89,7 +93,7 @@ export default {
 }
 
 .v-navigation-drawer {
-  transition: width 0.3s ease;
+  transition: width 0.5s ease-in-out;
 }
 
 .v-navigation-drawer:hover {
