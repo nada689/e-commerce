@@ -82,7 +82,7 @@ export default {
       const storedOrders = JSON.parse(localStorage.getItem("products")) || [];
       this.Orders = storedOrders;
     },
-    closeDialog() {
+    CloseDialog() {
       this.dialog = false;
       this.loadOrdersFromLocalStorage();
     },
