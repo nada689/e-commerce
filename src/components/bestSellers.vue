@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mt-2">
+  <v-card class="mt-2" style="width: 95%; margin: auto">
     <div class="d-flex px-5 pt-2">
       <p style="font-size: 20px !important">Bestsellers</p>
       <v-spacer></v-spacer>

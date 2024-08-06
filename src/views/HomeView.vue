@@ -1,147 +1,70 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <!-- Sidebar -->
-      <v-col cols="12" md="3" lg="2">
-        <sideBar />
-      </v-col>
-
-      <!-- Main Content -->
-      <v-col cols="12" md="7" lg="10">
-        <v-row>
-          <!-- Bestsellers Section -->
-          <v-col cols="12" md="6">
-            <bestSellers :bestsellers="bestsellers" />
-          </v-col>
-
-          <!-- Sales Forecast Section 
-          <v-col cols="12" md="6">
-            <salesForecast :salesForecast="salesForecast" />
-          </v-col>-->
-
-          <!-- Latest Orders Section -->
-          <v-col cols="12">
-            <lastOrders :latestOrders="latestOrders" />
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+  <ProductHeader />
+  <v-layout>
+    <v-container fluid>
+      <v-row>
+        <!-- Sidebar Filter for larger screens -->
+        <v-col cols="12" md="3" class="hidden-sm-and-down">
+          <SidebarFilter />
+        </v-col>
+        <v-col cols="12" md="9">
+          <v-row>
+            <!-- Sidebar Filter as a drawer for smaller screens -->
+            <v-col cols="12" class="d-flex d-md-none">
+              <v-btn icon @click="drawer = true">
+                <v-icon>mdi-filter-variant</v-icon>
+              </v-btn>
+              <v-navigation-drawer v-model="drawer" temporary absolute>
+                <SidebarFilter />
+              </v-navigation-drawer>
+            </v-col>
+            <!-- Product Cards -->
+            <v-col cols="12">
+              <ProductCard
+                v-for="product in products"
+                :key="product.id"
+                :product="product"
+              />
+            </v-col>
+          </v-row>
+          <ProductPagination />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-layout>
+  <PageFooter />
 </template>
 
 <script>
-import bestSellers from "@/components/bestSellers.vue";
-import lastOrders from "@/components/lastOrders.vue";
-import sideBar from "@/components/sideBar.vue";
+import ProductHeader from "../components/products/ProductHeader.vue";
+import SidebarFilter from "../components/products/SidebarFilter.vue";
+import ProductCard from "../components/products/ProductCard.vue";
+import ProductPagination from "../components/products/ProductPagination.vue";
+import PageFooter from "../components/products/PageFooter.vue";
+
 export default {
-  components: { bestSellers, lastOrders, sideBar },
+  name: "ProductsView",
+  components: {
+    ProductHeader,
+    SidebarFilter,
+    ProductCard,
+    ProductPagination,
+    PageFooter,
+  },
   data() {
     return {
-      bestsellers: [
-        {
-          product: "Deco accessory",
-          price: "$21.19",
-          sold: 409,
-          profit: 1928.27,
-        },
-        { product: "Pottery Vase", price: "$14.93", sold: 388, profit: 564.45 },
-        { product: "Rose Hobblack", price: "$8.15", sold: 243, profit: 727.87 },
-        {
-          product: "Flowering Cactus",
-          price: "$74.26",
-          sold: 563,
-          profit: 10325.47,
-        },
-      ],
-      latestOrders: [
-        {
-          products: "Analog Table Clock",
-          qty: 2,
-          date: "Feb 5, 2020",
-          revenue: "$83.52",
-          netProfit: "$90.76",
-          status: "Pending",
-        },
-        {
-          products: "Basket with handles",
-          qty: 3,
-          date: "Sep 8, 2020",
-          revenue: "$565.24",
-          netProfit: "$56.41",
-          status: "Shipping",
-        },
-        {
-          products: "Flower vase",
-          qty: 3,
-          date: "Dec 18, 2020",
-          revenue: "$115.26",
-          netProfit: "$85.66",
-          status: "Refund",
-        },
-        {
-          products: "Deco accessory",
-          qty: 2,
-          date: "Aug 13, 2020",
-          revenue: "$675.91",
-          netProfit: "$88.80",
-          status: "Completed",
-        },
-        {
-          products: "Pottery Vase",
-          qty: 3,
-          date: "May 8, 2020",
-          revenue: "$910.71",
-          netProfit: "$46.52",
-          status: "Shipping",
-        },
-        {
-          products: "Rose Hobblack",
-          qty: 4,
-          date: "Nov 15, 2020",
-          revenue: "$897.90",
-          netProfit: "$81.54",
-          status: "Completed",
-        },
-        {
-          products: "Table Lamp",
-          qty: 3,
-          date: "Oct 12, 2020",
-          revenue: "$673.19",
-          netProfit: "$90.76",
-          status: "Pending",
-        },
-        {
-          products: "Wall Clock",
-          qty: 4,
-          date: "Aug 19, 2020",
-          revenue: "$883.56",
-          netProfit: "$76.00",
-          status: "Refund",
-        },
-        {
-          products: "Flowering Cactus",
-          qty: 3,
-          date: "Oct 8, 2020",
-          revenue: "$135.18",
-          netProfit: "$86.65",
-          status: "Refund",
-        },
-        {
-          products: "Shell Collection",
-          qty: 4,
-          date: "Sep 23, 2020",
-          revenue: "$375.34",
-          netProfit: "$48.28",
-          status: "Completed",
-        },
+      drawer: false,
+      products: [
+        { id: 1, image: "path/to/image1.jpg", title: "Product 1", price: 20 },
+        { id: 2, image: "path/to/image2.jpg", title: "Product 2", price: 30 },
+        // Add all product details here
       ],
     };
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.v-card {
-  margin-bottom: 20px;
+<style scoped>
+body {
+  font-family: "Arial", sans-serif;
 }
 </style>

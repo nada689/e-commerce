@@ -116,7 +116,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* إضافة أي أنماط مخصصة هنا */
-</style>
