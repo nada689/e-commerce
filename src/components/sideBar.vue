@@ -17,8 +17,8 @@
         <v-list-item
           link
           prepend-icon="mdi-invoice-list-outline"
-          @click="$router.push('/produtsView')"
-          >Produts
+          @click="$router.push('/AddProducts')"
+          >Add Produts
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
