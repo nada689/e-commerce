@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "format": "prettier --write \"src//*.{js,vue,css}\"",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "fix-lint": "eslint --fix src/**/*.{js,vue}",
+    "format": "prettier --write src/**/*.{js,vue}",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
