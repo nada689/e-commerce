@@ -1,8 +1,8 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="overflow-hidden">
       <v-col cols="12" md="8">
-        <v-card>
+        <v-card height="100%">
           <div class="d-flex justify-space-between py-4 px-6">
             <h4>Dashboard</h4>
             <span>Advanced Report <v-icon>mdi-arrow-right</v-icon></span>
@@ -18,7 +18,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="4">
-        <v-card>
+        <v-card height="100%">
           <v-card-title>Cart</v-card-title>
           <v-card-text class="d-flex flex-column align-center">
             <v-progress-circular
