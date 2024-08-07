@@ -1,7 +1,7 @@
 <template>
   <router-view v-if="this.$route.path === '/'" />
 
-  <v-app v-else>
+  <v-layout v-else class="dashbordnav">
     <!--Menu icon  -->
     <v-app-bar
       app
@@ -15,6 +15,7 @@
     <!-- Sidebar -->
     <v-navigation-drawer
       v-model="drawer"
+      class="dashbordnav"
       :permanent="!isMobile"
       app
       style="background-color: var(--main-color); color: white"
@@ -48,12 +49,12 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-container fluid>
+      <v-container>
         <!-- Main Contetnt -->
         <router-view />
       </v-container>
     </v-main>
-  </v-app>
+  </v-layout>
 </template>
 <script>
 import { useDisplay } from "vuetify";
@@ -80,6 +81,9 @@ export default {
 </script>
 
 <style>
+.dashbordnav {
+  transition: 0.5s ease !important;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -91,13 +95,5 @@ export default {
   --main-color: #131118;
   --secound-color: #eee;
   --transition-time: 0.5s;
-}
-
-.v-navigation-drawer {
-  transition: width var(--transition-time) ease;
-}
-
-.v-navigation-drawer:hover {
-  width: 250px !important;
 }
 </style>
