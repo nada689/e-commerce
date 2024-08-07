@@ -17,7 +17,21 @@
       variant="outlined"
       required
     ></v-text-field>
+    <v-select
+      v-model="product.category"
+      :items="categories"
+      label="Select Category"
+      variant="outlined"
+      required
+    ></v-select>
 
+    <v-select
+      v-model="product.country"
+      :items="countries"
+      label="Select Country"
+      variant="outlined"
+      required
+    ></v-select>
     <v-file-input
       v-model="image"
       label="Product Image"
@@ -68,11 +82,15 @@ export default {
         name: "",
         price: "",
         image: "",
+        category: "",
+        country: "",
         description: "",
       },
       image: null,
       loading: false,
       editor: ClassicEditor,
+      categories: ["Electronics", "Furniture", "Clothing", "Books", "Toys"],
+      countries: ["USA", "Egypt", "Canada", "UK", "Germany", "France"],
       charCount: 0,
       maxChars: 150,
       editorConfig: {
@@ -124,30 +142,6 @@ export default {
         console.log(this.product.image);
       } else {
         this.product.image = null;
-      }
-    },
-    updateCharCount() {
-      this.charCount = this.product.description.length;
-
-      // Limit the text length
-      if (this.charCount > this.maxChars) {
-        this.product.description = this.product.description.substring(
-          0,
-          this.maxChars
-        );
-        this.charCount = this.maxChars;
-        this.$refs.ckeditor.editor.setData(this.product.description); // Update CKEditor content
-      }
-    },
-  },
-  watch: {
-    "product.description": function (newValue) {
-      if (newValue.length > this.maxChars) {
-        this.product.description = newValue.substring(0, this.maxChars);
-        this.charCount = this.maxChars;
-        this.$refs.ckeditor.editor.setData(this.product.description); // Update CKEditor content
-      } else {
-        this.charCount = newValue.length;
       }
     },
   },

@@ -21,6 +21,8 @@
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.country }}</td>
             <td v-html="item.description"></td>
             <td>
               <v-icon @click="editOrder(order)">mdi-pencil-outline</v-icon>
@@ -64,6 +66,8 @@ export default {
         },
         { title: "Product Name", align: "start", key: "name" }, // Changed from "products" to "name"
         { title: "Price", align: "start", key: "price" },
+        { title: "Country", align: "start", key: "country" },
+        { title: "Category", align: "start", key: "category" },
         {
           title: "Description",
           align: "start",
