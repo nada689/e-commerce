@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card height="100%">
     <v-card-title class="d-flex justify-space-between">
       <span> Revenue by device </span>
       <v-spacer></v-spacer>
