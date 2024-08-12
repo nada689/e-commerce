@@ -102,8 +102,23 @@
           </v-list-item-icon>
         </v-list-item>
         <v-list-item>
-          <v-btn id="login-btn-drawer" color="black" outlined block
+          <v-btn
+            id="login-btn-drawer"
+            color="black"
+            outlined
+            block
+            @click="$router.push('/LoginPage')"
             >Login</v-btn
+          >
+        </v-list-item>
+        <v-list-item>
+          <v-btn
+            id="login-btn-drawer"
+            color="black"
+            outlined
+            block
+            @click="$router.push('/sign-up')"
+            >SignUp</v-btn
           >
         </v-list-item>
       </v-list>
