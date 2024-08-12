@@ -1,6 +1,10 @@
 <template>
   <router-view
-    v-if="this.$route.path === '/' || this.$route.path === '/sign-up'"
+    v-if="
+      this.$route.path === '/' ||
+      this.$route.path === '/sign-up' ||
+      this.$route.path === '/LoginPage'
+    "
   />
 
   <v-layout v-else class="dashbordnav">
