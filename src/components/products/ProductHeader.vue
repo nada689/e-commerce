@@ -29,7 +29,7 @@
             <v-btn text>Our Story</v-btn>
             <v-btn text>Blog</v-btn>
             <v-btn text>Contact Us</v-btn>
-            <v-btn @click="$router.push('/dashboard')">Admin Dashboard</v-btn>
+            <v-btn @click="$router.push('/dashboard')">Dashboard</v-btn>
           </v-col>
 
           <!-- Icons and Login button -->
@@ -38,6 +38,13 @@
             <v-icon>mdi-heart-outline</v-icon>
             <v-icon>mdi-cart-outline</v-icon>
             <v-btn id="login-btn" color="white" outlined>Login</v-btn>
+            <v-btn
+              id="login-btn"
+              color="white"
+              outlined
+              @click="$router.push('/sign-up')"
+              >SignUp</v-btn
+            >
           </v-col>
 
           <!-- Navigation icon for smaller screens -->
@@ -67,7 +74,7 @@
         </v-list-item>
         <v-list-item link>
           <v-list-item-title @click="$router.push('/dashboard')"
-            >Admin Dashboard</v-list-item-title
+            >Dashboard</v-list-item-title
           >
         </v-list-item>
       </v-list>

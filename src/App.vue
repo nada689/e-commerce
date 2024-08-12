@@ -1,5 +1,7 @@
 <template>
-  <router-view v-if="this.$route.path === '/'" />
+  <router-view
+    v-if="this.$route.path === '/' || this.$route.path === '/sign-up'"
+  />
 
   <v-layout v-else class="dashbordnav">
     <!--Menu icon  -->
