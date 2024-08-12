@@ -37,7 +37,13 @@
             <v-icon>mdi-magnify</v-icon>
             <v-icon>mdi-heart-outline</v-icon>
             <v-icon>mdi-cart-outline</v-icon>
-            <v-btn id="login-btn" color="white" outlined>Login</v-btn>
+            <v-btn
+              id="login-btn"
+              color="white"
+              @click="$router.push('/LoginPage')"
+              outlined
+              >Login</v-btn
+            >
             <v-btn
               id="login-btn"
               color="white"
