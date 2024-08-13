@@ -18,7 +18,6 @@ export const useAuthStore = defineStore("auth", {
       verification: 0,
       agree: false,
     },
-    valid: false,
     countries: [
       "Egypt \uD83C\uDDEA\uD83C\uDDEC",
       "USA  \uD83C\uDDFA\uD83C\uDDF8",
