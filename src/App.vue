@@ -15,6 +15,10 @@
       dark
     >
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        v-if="isLoggedIn"
+        @click="logout"
+      ></v-app-bar-nav-icon>
       <v-toolbar-title>{{ selectedItem }}</v-toolbar-title>
     </v-app-bar>
 
@@ -81,6 +85,15 @@ export default {
   computed: {
     isMobile() {
       return this.smAndDown;
+    },
+    isLoggedIn() {
+      return !!localStorage.getItem("token");
+    },
+  },
+  method: {
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push("/login");
     },
   },
 };

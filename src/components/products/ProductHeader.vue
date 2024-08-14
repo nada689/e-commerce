@@ -38,11 +38,21 @@
             <v-icon>mdi-heart-outline</v-icon>
             <v-icon>mdi-cart-outline</v-icon>
             <v-btn
+              v-if="!isLoggedIn"
               id="login-btn"
               color="white"
               @click="$router.push('/LoginPage')"
               outlined
               >Login</v-btn
+            >
+            <v-btn
+              v-else
+              id="logout-btn"
+              color="white"
+              @click="logout"
+              outlined
+              style="background-color: #000; border-radius: 30px"
+              >Logout</v-btn
             >
             <v-btn
               id="login-btn"
@@ -103,12 +113,21 @@
         </v-list-item>
         <v-list-item>
           <v-btn
-            id="login-btn-drawer"
-            color="black"
-            outlined
-            block
+            v-if="!isLoggedIn"
+            id="login-btn"
+            color="white"
             @click="$router.push('/LoginPage')"
+            outlined
             >Login</v-btn
+          >
+          <v-btn
+            v-else
+            id="logout-btn"
+            style="background-color: #000"
+            color="#fff"
+            @click="logout"
+            outlined
+            >Logout</v-btn
           >
         </v-list-item>
         <v-list-item>
@@ -132,7 +151,25 @@ export default {
   data() {
     return {
       drawer: false,
+      isLoggedIn: !!localStorage.getItem("token"),
     };
+  },
+  methods: {
+    checkLoginStatus() {
+      this.isLoggedIn = !!localStorage.getItem("token");
+    },
+    logout() {
+      localStorage.removeItem("token"); // حذف التوكن
+      this.isLoggedIn = false;
+      this.$router.push("/LoginPage"); // إعادة التوجيه إلى صفحة تسجيل الدخول
+    },
+  },
+  created() {
+    this.checkLoginStatus();
+  },
+  watch: {
+    // راقب التغيير في التوكن لتحديث حالة تسجيل الدخول
+    $route: "checkLoginStatus",
   },
 };
 </script>

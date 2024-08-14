@@ -1,189 +1,213 @@
 <template>
+  <v-container>
+    <ProductHeader />
+  </v-container>
   <div class="login-container">
-    <div class="content-container">
-      <v-card class="login-card" elevation="10">
-        <v-card-title class="headline">Login</v-card-title>
-        <v-card-text>
-          <v-form ref="form" v-model="valid">
-            <v-text-field
-              v-model="email"
-              label="Email"
-              :rules="emailRules"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="password"
-              label="Password"
-              type="password"
-              :rules="passwordRules"
-              required
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" :disabled="!valid">Login</v-btn>
-        </v-card-actions>
-        <v-divider></v-divider>
-        <div class="login-links">
-          <v-row justify="space-between">
-            <v-col>
-              <a href="#">Create Account</a>
-            </v-col>
-            <v-col class="text-right">
-              <a href="#">Mobile Number Sign In</a>
-            </v-col>
-          </v-row>
+    <div class="login-banner">
+      <div class="mb-3">
+        <h1 style="font-size: 100px; letter-spacing: 10px">
+          E<span style="color: #4834d4">L</span>I<span style="color: #eb4d4b"
+            >T</span
+          >E
+        </h1>
+        <h6 style="font-size: 37px; margin-top: -27px">PARTNER EVENT</h6>
+      </div>
+      <div>
+        <div>
+          <h1 style="font-size: 45px">TOP 100</h1>
+          <h5 style="font-size: 40px; margin-top: -20px">INDUSTRY BRANDS</h5>
+          <v-btn
+            class="mt-5"
+            style="
+              border-radius: 30px;
+              background-color: #fff;
+              color: #000;
+              font-size: 20px;
+              font-weight: bold;
+            "
+            @click="sourceNow"
+          >
+            Source now
+          </v-btn>
         </div>
-        <v-card-text class="social-login">
-          <div class="sign-in-with">Sign in with</div>
-          <v-btn icon>
-            <v-icon color="blue darken-3">mdi-facebook</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon color="red">mdi-google</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon color="blue darken-1">mdi-linkedin</v-icon>
-          </v-btn>
-        </v-card-text>
-      </v-card>
-      <div class="side-text">
-        <h2>Welcome Back!</h2>
-        <p>Sign in to continue to your account.</p>
       </div>
     </div>
-    <div class="animation-container">
-      <div class="circle"></div>
-      <div class="triangle"></div>
+
+    <div class="login-form">
+      <h3 class="mt-12">Account:</h3>
+      <input
+        type="text"
+        placeholder="Enter your email or member ID"
+        v-model="account"
+      />
+      <v-row class="d-flex align-center justify-space-between mt-4 w-100">
+        <v-col cols="auto">
+          <h3>Password:</h3>
+        </v-col>
+        <v-col cols="auto" style="margin-top: -28px">
+          <a href="#">Forgot password?</a>
+        </v-col>
+      </v-row>
+      <input type="password" placeholder="Enter password" v-model="password" />
+      <button class="mt-3" @click="signIn">Sign in</button>
+      <v-row class="d-flex align-center justify-space-between mt-4 w-100">
+        <v-col cols="auto" style="color: #22a6b3">
+          <h4>Mobile Number Sign in</h4>
+        </v-col>
+        <v-col cols="auto" style="margin-top: -15px">
+          <a href="#" style="color: #22a6b3; font-weight: bold"
+            >Create Account</a
+          >
+        </v-col>
+      </v-row>
+      <v-divider></v-divider>
+      <v-divider></v-divider>
+
+      <div class="social-login mt-6">
+        <p style="font-size: 20px; font-weight: bold; margin-right: 5px">
+          Sign in with:
+        </p>
+        <div style="font-size: 20px">
+          <v-icon class="mr-2" style="color: #fbbc05">mdi-google</v-icon>
+          <v-icon class="mr-2" style="color: #1877f2">mdi-facebook</v-icon>
+          <v-icon class="mr-2" style="color: #004182">mdi-linkedin</v-icon>
+        </div>
+      </div>
     </div>
   </div>
+  <PageFooter />
 </template>
 
 <script>
+import PageFooter from "@/components/products/PageFooter.vue";
+import ProductHeader from "@/components/products/ProductHeader.vue";
+import axios from "axios";
+
 export default {
+  components: {
+    ProductHeader,
+    PageFooter,
+  },
   data() {
     return {
-      email: "",
+      account: "",
       password: "",
-      valid: false,
-      emailRules: [
-        (v) => !!v || "Email is required",
-        (v) => /.+@.+\..+/.test(v) || "Email must be valid",
-      ],
-      passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) => v.length >= 6 || "Password must be at least 6 characters",
-      ],
     };
+  },
+  methods: {
+    async signIn() {
+      try {
+        const response = await axios.post(
+          "https://gcc-eosin.vercel.app/api/v1/auth/login/",
+          {
+            username: this.account,
+            password: this.password,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        console.log("Response object:", response);
+
+        if (response && response.data) {
+          console.log("Login successful:", response.data);
+          localStorage.setItem("token", response.data["JWT Token"]);
+          this.$router.push("/");
+        } else {
+          console.error("Response data is missing.");
+        }
+      } catch (error) {
+        console.error(
+          "Login failed:",
+          error.response ? error.response.data : error.message
+        );
+        alert(
+          "Login failed: " +
+            (error.response ? error.response.data.message : error.message)
+        );
+      }
+    },
+    signInWith(provider) {
+      alert(`Sign in with ${provider} is currently not implemented.`);
+    },
+    sourceNow() {
+      alert("Source Now button clicked.");
+    },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .login-container {
+  margin-top: 0px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  position: relative;
-}
-
-.content-container {
-  display: flex;
-  align-items: center;
-}
-
-.login-card {
-  width: 400px;
+  height: 839px;
   padding: 20px;
-  background-color: white;
-  border-radius: 15px;
+  background: url("../assets/6.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
-.side-text {
-  margin-left: 40px;
+.login-banner {
   color: white;
+  text-align: left;
 }
 
-.headline {
-  text-align: center;
-  color: #4a4a4a;
-  font-weight: bold;
+.login-form {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.v-text-field {
-  margin-bottom: 20px;
+.login-form h3 {
+  margin-bottom: 10px;
 }
 
-.login-links {
-  margin-top: 20px;
+.login-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff8c00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-form a {
+  display: block;
+  text-align: right;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
 }
 
 .social-login {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+  justify-content: space-between;
 }
 
-.sign-in-with {
-  margin-right: 10px;
-}
-
-.v-btn {
-  color: white;
-}
-
-.animation-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.circle {
-  width: 100px;
-  height: 100px;
-  background-color: #ff6b6b;
-  border-radius: 50%;
-  position: absolute;
-  top: 20%;
-  left: 10%;
-  animation: moveCircle 4s infinite ease-in-out;
-}
-
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 60px solid transparent;
-  border-right: 60px solid transparent;
-  border-bottom: 100px solid #6a0572;
-  position: absolute;
-  bottom: 20%;
-  right: 10%;
-  animation: moveTriangle 5s infinite ease-in-out;
-}
-
-@keyframes moveCircle {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes moveTriangle {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(20px);
-  }
+.social-login button {
+  background: #f1f1f1;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>
