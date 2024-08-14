@@ -148,7 +148,7 @@
 
 <script>
 import { mapState } from "pinia";
-import { useAuthStore } from "@/store/SignUp.js";
+import { useAuthStore } from "@/store/Auth/SignUp.js";
 export default {
   computed: {
     ...mapState(useAuthStore, ["user", "valid", "countries"]),
