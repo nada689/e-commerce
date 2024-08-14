@@ -145,7 +145,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login-container {
   margin-top: 0px;
   display: flex;
