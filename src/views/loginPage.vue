@@ -1,8 +1,19 @@
 <template>
-  <v-container fluid style="padding: 0; margin: 0">
-    <ProductHeader />
-
+  <v-container
+    class="parent"
+    fluid
+    style="
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    "
+  >
     <div class="login-container">
+      <div class="nav">
+        <ProductHeader />
+      </div>
       <div class="login-banner">
         <div class="mb-3">
           <h1 style="font-size: 100px; letter-spacing: 10px">
@@ -79,7 +90,9 @@
         </div>
       </div>
     </div>
-    <PageFooter />
+    <div class="footer" style="flex: 0 0 auto">
+      <PageFooter />
+    </div>
   </v-container>
 </template>
 
@@ -146,15 +159,21 @@ export default {
 </script>
 
 <style scoped>
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
 .login-container {
+  height: 100vh;
   margin-top: 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 895px;
-  padding: 20px;
-  background: url("../assets/6.jpg") no-repeat center center fixed;
+  background: url("../assets/6.jpg") no-repeat center center;
   background-size: cover;
+  overflow: hidden;
 }
 
 .login-banner {
@@ -214,5 +233,7 @@ export default {
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
+}
+.footer {
 }
 </style>
