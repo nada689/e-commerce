@@ -195,8 +195,9 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapState, mapActions } from "pinia";
 import { useAuthStore } from "@/store/Auth/SignUp.js";
+import { useCountryStore } from "@/store/useCountryStore.js";
 export default {
   data() {
     return {
@@ -225,6 +226,7 @@ export default {
     ...mapState(useAuthStore, ["user", "countries"]),
   },
   methods: {
+    ...mapActions(useCountryStore, ["fetchCountry"]),
     async submit() {
       let valid = await this.$refs.form.validate();
       console.log(valid);
@@ -235,6 +237,9 @@ export default {
         console.log("Form validation failed.");
       }
     },
+  },
+  mounted() {
+    this.fetchCountry();
   },
 };
 </script>
