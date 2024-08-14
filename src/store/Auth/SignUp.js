@@ -33,7 +33,7 @@ export const useAuthStore = defineStore("auth", {
       const data = {
         country: "Egypt",
         username: "Mostafa Samy",
-        email: "mostafasamysfsf@gmail.com",
+        email: "mostafa2samysfsf@gmail.com",
         password: "Mostafa@2002",
         passwordConfirm: "Mostafa@2002",
         phone: "01009007842",
@@ -44,7 +44,7 @@ export const useAuthStore = defineStore("auth", {
         "Content-Type": "application/json",
       };
       try {
-        const response = await axios.post("user/register", data, { headers });
+        const response = await axios.post("v1/auth/signup", data, { headers });
         if (response.status === 200) this.$router.push("/login");
         console.log("User registered successfully:", response.data);
       } catch (error) {
