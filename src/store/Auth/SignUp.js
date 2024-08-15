@@ -4,8 +4,9 @@ import axios from "axios";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
+    verified: 0,
     user: {
-      country: "",
+      country: "Egypt",
       tradeRole: "",
       email: "",
       password: "",
@@ -16,21 +17,25 @@ export const useAuthStore = defineStore("auth", {
       countryCode: "20",
       areaCode: "",
       phoneNumber: "",
-      random: 0,
       agree: false,
     },
-    countries: [
-      "Egypt \uD83C\uDDEA\uD83C\uDDEC",
-      "USA  \uD83C\uDDFA\uD83C\uDDF8",
-      "Canada  \uD83C\uDDE8\uD83C\uDDE6",
-      "France  \uD83C\uDDEB\uD83C\uDDF7",
-      "Germany  \uD83C\uDDE9\uD83C\uDDEA",
-    ],
   }),
   actions: {
+    async Verified() {
+      this.verified = 1;
+      console.log(this.verified);
+    },
+    async signUp() {
+      console.log(this.verified);
+      console.log(this.user);
+    },
+    NotVerified() {
+      this.verified = 0;
+      console.log(this.verified);
+    },
     async registerUser() {
       const data = {
-        country: "Egypt",
+        country: this.user.country,
         role: this.user.tradeRole,
         email: this.user.email,
         password: this.user.password,
@@ -39,6 +44,7 @@ export const useAuthStore = defineStore("auth", {
         phone: this.user.phoneNumber,
         firstName: this.user.firstName,
         lastName: this.user.lastName,
+        verified: this.verified,
       };
       const headers = {
         "Content-Type": "application/json",
@@ -47,8 +53,8 @@ export const useAuthStore = defineStore("auth", {
         const response = await axios.post("/v1/auth/signup/", data, {
           headers,
         });
-        if (response.status === 200) this.$router.push("/LoginPage");
         console.log("User registered successfully:", response.data);
+        this.$router.push("/LoginPage");
         this.user = {
           country: "",
           tradeRole: "",
