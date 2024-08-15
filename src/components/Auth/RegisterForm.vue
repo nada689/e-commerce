@@ -86,10 +86,10 @@
       <v-list>
         <v-list-item>
           <v-list-item-title>
-            <v-icon v-if="this.flag" color="green"
+            <v-icon v-if="this.flag === true" color="green"
               >mdi-checkbox-marked-circle-outline</v-icon
             >
-            <v-icon v-if="!this.flag" color="red"
+            <v-icon v-if="this.flag === false" color="red"
               >mdi-alpha-x-circle-outline</v-icon
             >
             Password is required
@@ -98,10 +98,10 @@
 
         <v-list-item>
           <v-list-item-title>
-            <v-icon v-if="this.flag1" color="green"
+            <v-icon v-if="this.flag1 === true" color="green"
               >mdi-checkbox-marked-circle-outline</v-icon
             >
-            <v-icon v-if="!this.flag1" color="red"
+            <v-icon v-if="this.flag1 === false" color="red"
               >mdi-alpha-x-circle-outline</v-icon
             >
             Password must be at least 8 characters long
@@ -110,10 +110,10 @@
 
         <v-list-item>
           <v-list-item-title>
-            <v-icon v-if="this.flag2" color="green"
+            <v-icon v-if="this.flag2 === true" color="green"
               >mdi-checkbox-marked-circle-outline</v-icon
             >
-            <v-icon v-if="!this.flag2" color="red"
+            <v-icon v-if="this.flag2 === false" color="red"
               >mdi-alpha-x-circle-outline</v-icon
             >
             Password must contain at least one uppercase letter
@@ -122,10 +122,10 @@
 
         <v-list-item>
           <v-list-item-title>
-            <v-icon v-if="this.flag3" color="green"
+            <v-icon v-if="this.flag3 === true" color="green"
               >mdi-checkbox-marked-circle-outline</v-icon
             >
-            <v-icon v-if="!this.flag3" color="red"
+            <v-icon v-if="this.flag3 === false" color="red"
               >mdi-alpha-x-circle-outline</v-icon
             >
             Password must contain at least one lowercase letter
@@ -134,10 +134,10 @@
 
         <v-list-item>
           <v-list-item-title>
-            <v-icon v-if="this.flag4" color="green"
+            <v-icon v-if="this.flag4 === true" color="green"
               >mdi-checkbox-marked-circle-outline</v-icon
             >
-            <v-icon v-if="!this.flag4" color="red"
+            <v-icon v-if="this.flag4 === false" color="red"
               >mdi-alpha-x-circle-outline</v-icon
             >
             Password must contain at least one number
@@ -146,10 +146,10 @@
 
         <v-list-item>
           <v-list-item-title>
-            <v-icon v-if="this.flag5" color="green"
+            <v-icon v-if="this.flag5 === true" color="green"
               >mdi-checkbox-marked-circle-outline</v-icon
             >
-            <v-icon v-if="!this.flag5" color="red"
+            <v-icon v-if="this.flag5 === false" color="red"
               >mdi-alpha-x-circle-outline</v-icon
             >
             Password must contain at least one special character
