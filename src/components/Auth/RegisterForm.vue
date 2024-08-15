@@ -347,52 +347,41 @@ export default {
             return this.text;
           }
           this.PassRule = true;
-          return true;
-        },
-        (v) => {
+          
           if (!/[A-Z]/.test(v)) {
             this.text = "Password must contain at least one uppercase letter";
             this.PassRule1 = false;
             return this.text;
           }
           this.PassRule1 = true;
-          return true;
-        },
-        (v) => {
+       
           if (!/[a-z]/.test(v)) {
             this.text = "Password must contain at least one lowercase letter";
             this.PassRule2 = false;
             return this.text;
           }
           this.PassRule2 = true;
-          return true;
-        },
-        (v) => {
+       
           if (!/[0-9]/.test(v)) {
             this.text = "Password must contain at least one number";
             this.PassRule3 = false;
             return this.text;
           }
           this.PassRule3 = true;
-          return true;
-        },
-        (v) => {
+
           if (!/[@$!%*?&#]/.test(v)) {
             this.text = "Password must contain at least one special character";
             this.PassRule4 = false;
             return this.text;
           }
           this.PassRule4 = true;
-          return true;
-        },
-        (v) => {
+
           if (v.length < 8) {
             this.text = "Password must be at least 8 characters";
             this.PassRule5 = false;
             return this.text;
           }
           this.PassRule5 = true;
-          return true;
         },
       ],
     };
