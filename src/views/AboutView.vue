@@ -11,7 +11,3 @@ export default {
   },
 };
 </script>
-
-<style>
-/* You can leave this empty if you don't need additional styles */
-</style>
