@@ -1,8 +1,19 @@
 <template>
-  <v-container fluid style="padding: 0; margin: 0">
-    <ProductHeader />
-
+  <v-container
+    class="parent"
+    fluid
+    style="
+      padding: 0;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    "
+  >
     <div class="login-container">
+      <div class="nav">
+        <ProductHeader />
+      </div>
       <div class="login-banner">
         <div class="mb-3">
           <h1 style="font-size: 100px; letter-spacing: 10px">
@@ -25,7 +36,6 @@
                 font-size: 20px;
                 font-weight: bold;
               "
-              @click="sourceNow"
             >
               Source now
             </v-btn>
@@ -34,7 +44,9 @@
       </div>
 
       <div class="login-form">
-        <h3 class="mt-12">Account:</h3>
+        <h3 class="mt-12" style="font-weight: bold; font-size: 20px">
+          Account:
+        </h3>
         <input
           type="text"
           placeholder="Enter your email or member ID"
@@ -42,7 +54,7 @@
         />
         <v-row class="d-flex align-center justify-space-between mt-4 w-100">
           <v-col cols="auto">
-            <h3>Password:</h3>
+            <h3 style="font-weight: bold; font-size: 20px">Password:</h3>
           </v-col>
           <v-col cols="auto" style="margin-top: -28px">
             <a href="#">Forgot password?</a>
@@ -64,10 +76,8 @@
             >
           </v-col>
         </v-row>
-        <v-divider></v-divider>
-        <v-divider></v-divider>
 
-        <div class="social-login mt-6">
+        <div class="social-login mt-6 mb-5">
           <p style="font-size: 20px; font-weight: bold; margin-right: 5px">
             Sign in with:
           </p>
@@ -79,7 +89,9 @@
         </div>
       </div>
     </div>
-    <PageFooter />
+    <div class="footer" style="flex: 0 0 auto">
+      <PageFooter />
+    </div>
   </v-container>
 </template>
 
@@ -138,23 +150,25 @@ export default {
     signInWith(provider) {
       alert(`Sign in with ${provider} is currently not implemented.`);
     },
-    sourceNow() {
-      alert("Source Now button clicked.");
-    },
   },
 };
 </script>
 
-<style>
+<style scoped>
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
 .login-container {
-  margin-top: 0px;
+  height: 100vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 895px;
-  padding: 20px;
-  background: url("../assets/6.jpg") no-repeat center center fixed;
+  background: url("../assets/6.jpg") no-repeat center center;
   background-size: cover;
+  overflow: hidden;
 }
 
 .login-banner {
@@ -170,7 +184,6 @@ export default {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .login-form h3 {
