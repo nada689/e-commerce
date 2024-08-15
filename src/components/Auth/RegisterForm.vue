@@ -405,3 +405,16 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@media (max-width: 700px) {
+  .v-form {
+    width: 90% !important;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 950px) {
+  .v-form {
+    width: 70% !important;
+  }
+}
+</style>
