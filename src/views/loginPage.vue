@@ -71,7 +71,9 @@
             <h4>Mobile Number Sign in</h4>
           </v-col>
           <v-col cols="auto" style="margin-top: -15px">
-            <a href="#" style="color: #22a6b3; font-weight: bold"
+            <a
+              @click="$router.push('/sign-up')"
+              style="color: #22a6b3; font-weight: bold; cursor: pointer"
               >Create Account</a
             >
           </v-col>

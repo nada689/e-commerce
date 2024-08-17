@@ -21,6 +21,7 @@ export const useCountryStore = defineStore("countryStore", {
             const countryData = {
               name: data.name,
               phone: data.phonecode,
+              keyCode: data.isoCode,
             };
             this.CountryName.push(countryData);
           });
