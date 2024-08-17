@@ -7,15 +7,15 @@ export const useAuthStore = defineStore("auth", {
     verified: 0,
     user: {
       country: "Egypt",
-      tradeRole: "",
+      tradeRole: 1,
       email: "",
       password: "",
       confirmPassword: "",
       companyName: "",
       firstName: "",
       lastName: "",
-      countryCode: "20",
-      areaCode: "",
+      countryCode: "+" + "20",
+      keyCode: "EG",
       phoneNumber: "",
       agree: false,
     },
@@ -26,17 +26,13 @@ export const useAuthStore = defineStore("auth", {
       console.log(this.verified);
     },
     async signUp() {
-      console.log(this.verified);
-      console.log(this.user);
-    },
-    NotVerified() {
-      this.verified = 0;
-      console.log(this.verified);
-    },
-    async registerUser() {
       const data = {
-        country: this.user.country,
-        role: this.user.tradeRole,
+        country: {
+          PhoneKey: this.user.countryCode,
+          name: this.user.country,
+          KeyCode: this.user.keyCode,
+        },
+        role: Number(this.user.tradeRole),
         email: this.user.email,
         password: this.user.password,
         passwordConfirm: this.user.confirmPassword,
@@ -45,6 +41,30 @@ export const useAuthStore = defineStore("auth", {
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         verified: this.verified,
+      };
+      console.log(this.verified);
+      console.log(data);
+    },
+    NotVerified() {
+      this.verified = 0;
+      console.log(this.verified);
+    },
+    async registerUser() {
+      const data = {
+        role: Number(this.user.tradeRole),
+        email: this.user.email,
+        password: this.user.password,
+        passwordConfirm: this.user.confirmPassword,
+        companyName: this.user.companyName,
+        phone: this.user.phoneNumber,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        verified: this.verified,
+        country: {
+          PhoneKey: this.user.countryCode,
+          name: this.user.country,
+          KeyCode: this.user.keyCode,
+        },
       };
       const headers = {
         "Content-Type": "application/json",

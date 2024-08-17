@@ -122,11 +122,11 @@
           >
           <v-btn
             v-else
-            id="logout-btn"
-            style="background-color: #000"
-            color="#fff"
-            @click="logout"
+            id="login-btn-drawer"
+            color="black"
             outlined
+            block
+            @click="logout"
             >Logout</v-btn
           >
         </v-list-item>

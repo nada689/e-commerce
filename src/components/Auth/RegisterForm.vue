@@ -2,26 +2,29 @@
   <v-form ref="form" class="w-1/2 m-auto py-5">
     <div class="text-center" justify="end">
       <!-- Country/Region -->
-      <v-tooltip :text="user.country" location="top">
-        <template v-slot:activator="{ props }">
-          <v-select
-            v-model="user.country"
-            :items="CountryName"
-            item-title="name"
-            item-value="name"
-            v-bind="props"
-            placeholder="Select a country"
-            :rules="[(v) => !!v || 'Country / Region is required']"
-            required
-            variant="outlined"
-          >
-            <template v-slot:prepend>
-              <span>Country / Region <span class="text-third">*</span> :</span>
-            </template>
-          </v-select>
-        </template>
-      </v-tooltip>
-
+      <div>
+        <v-tooltip :text="user.country" location="top">
+          <template v-slot:activator="{ props }">
+            <v-select
+              v-model="user.country"
+              :items="CountryName"
+              item-title="name"
+              item-value="name"
+              v-bind="props"
+              placeholder="Select a country"
+              :rules="[(v) => !!v || 'Country / Region is required']"
+              required
+              variant="outlined"
+            >
+              <template v-slot:prepend>
+                <span
+                  >Country / Region <span class="text-third">*</span> :</span
+                >
+              </template>
+            </v-select>
+          </template>
+        </v-tooltip>
+      </div>
       <!-- Trade Role -->
       <v-row>
         <v-radio-group
@@ -37,9 +40,9 @@
             >
           </template>
           <div class="flex space-x-4">
-            <v-radio label="Buyer" value="Buyer"></v-radio>
-            <v-radio label="Seller" value="Seller"></v-radio>
-            <v-radio label="Both" value="Both"></v-radio>
+            <v-radio label="Buyer" value="1"></v-radio>
+            <v-radio label="Seller" value="2"></v-radio>
+            <v-radio label="Both" value="3"></v-radio>
           </div>
         </v-radio-group>
       </v-row>
@@ -65,101 +68,45 @@
           </v-text-field>
         </template>
       </v-tooltip>
-
-      <!-- Password -->
+      <!-- Password Input Field with Validation Rules -->
       <v-menu open-on-hover location="right" offset-x>
         <template v-slot:activator="{ props: menu }">
-          <v-tooltip :text="text" location="top">
+          <v-tooltip :text="tooltipText" location="top">
             <template v-slot:activator="{ props: tooltip }">
               <v-text-field
                 v-model="user.password"
                 type="password"
                 variant="outlined"
                 placeholder="Set the login password"
-                :rules="passwordRules"
+                :rules="[validatePassword]"
                 v-bind="mergeProps(menu, tooltip)"
                 required
               >
                 <template v-slot:prepend>
-                  <span
-                    >Login Password <span class="text-third">*</span> :</span
-                  >
+                  <span>
+                    Login Password <span class="text-third">*</span> :
+                  </span>
                 </template>
               </v-text-field>
             </template>
           </v-tooltip>
         </template>
 
+        <!-- Password Validation Rules List -->
         <v-list>
-          <v-list-item>
+          <v-list-item
+            v-for="(rule, index) in passwordValidationRules"
+            :key="index"
+          >
             <v-list-item-title>
-              <v-icon v-if="this.PassRule" color="green"
-                >mdi-checkbox-marked-circle-outline</v-icon
-              >
-              <v-icon v-if="!this.PassRule" color="red"
-                >mdi-alpha-x-circle-outline</v-icon
-              >
-              Password is required
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>
-              <v-icon v-if="this.PassRule5" color="green"
-                >mdi-checkbox-marked-circle-outline</v-icon
-              >
-              <v-icon v-if="!this.PassRule5" color="red"
-                >mdi-alpha-x-circle-outline</v-icon
-              >
-              Password must be at least 8 characters long
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>
-              <v-icon v-if="this.PassRule1" color="green"
-                >mdi-checkbox-marked-circle-outline</v-icon
-              >
-              <v-icon v-if="!this.PassRule1" color="red"
-                >mdi-alpha-x-circle-outline</v-icon
-              >
-              Password must contain at least one uppercase letter
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>
-              <v-icon v-if="this.PassRule2" color="green"
-                >mdi-checkbox-marked-circle-outline</v-icon
-              >
-              <v-icon v-if="!this.PassRule2" color="red"
-                >mdi-alpha-x-circle-outline</v-icon
-              >
-              Password must contain at least one lowercase letter
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>
-              <v-icon v-if="this.PassRule3" color="green"
-                >mdi-checkbox-marked-circle-outline</v-icon
-              >
-              <v-icon v-if="!this.PassRule3" color="red"
-                >mdi-alpha-x-circle-outline</v-icon
-              >
-              Password must contain at least one number
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>
-              <v-icon v-if="this.PassRule4" color="green"
-                >mdi-checkbox-marked-circle-outline</v-icon
-              >
-              <v-icon v-if="!this.PassRule4" color="red"
-                >mdi-alpha-x-circle-outline</v-icon
-              >
-              Password must contain at least one special character
+              <v-icon :color="rule.isValid ? 'green' : 'red'">
+                {{
+                  rule.isValid
+                    ? "mdi-checkbox-marked-circle-outline"
+                    : "mdi-alpha-x-circle-outline"
+                }}
+              </v-icon>
+              {{ rule.message }}
             </v-list-item-title>
           </v-list-item>
         </v-list>
@@ -261,7 +208,7 @@
             required
             :rules="[
               (v) => !!v || 'Country Code is required',
-              (v) => /^\d{1,4}$/.test(v) || 'Please enter a valid Country Code',
+              (v) => /^\+/.test(v) || 'Please enter a valid Country Code',
             ]"
           >
             <template v-slot:prepend>
@@ -271,6 +218,7 @@
         </v-col>
 
         <v-col cols="12" sm="7" md="7" lg="7" xs="12">
+          <input type="hidden" v-model="user.keyCode" />
           <v-tooltip text="Phone Number is required" location="top">
             <template v-slot:activator="{ props }">
               <v-text-field
@@ -278,10 +226,7 @@
                 variant="outlined"
                 placeholder="Phone Number"
                 v-bind="props"
-                :rules="[
-                  (v) => !!v || 'Phone Number is required',
-                  (v) => /^\d{1,10}$/.test(v) || 'Please enter up to 10 digits',
-                ]"
+                :rules="[(v) => !!v || 'Phone Number is required']"
                 required
               ></v-text-field>
             </template>
@@ -332,56 +277,45 @@ export default {
   data() {
     return {
       password: "",
-      text: "",
-      PassRule: false,
-      PassRule5: false,
-      PassRule2: false,
-      PassRule1: false,
-      PassRule3: false,
-      PassRule4: false,
-      passwordRules: [
-        (v) => {
-          if (!v) {
-            this.text = "Password is required";
-            this.PassRule = false;
-            return this.text;
-          }
-          this.PassRule = true;
-          
-          if (!/[A-Z]/.test(v)) {
-            this.text = "Password must contain at least one uppercase letter";
-            this.PassRule1 = false;
-            return this.text;
-          }
-          this.PassRule1 = true;
-       
-          if (!/[a-z]/.test(v)) {
-            this.text = "Password must contain at least one lowercase letter";
-            this.PassRule2 = false;
-            return this.text;
-          }
-          this.PassRule2 = true;
-       
-          if (!/[0-9]/.test(v)) {
-            this.text = "Password must contain at least one number";
-            this.PassRule3 = false;
-            return this.text;
-          }
-          this.PassRule3 = true;
-
-          if (!/[@$!%*?&#]/.test(v)) {
-            this.text = "Password must contain at least one special character";
-            this.PassRule4 = false;
-            return this.text;
-          }
-          this.PassRule4 = true;
-
-          if (v.length < 8) {
-            this.text = "Password must be at least 8 characters";
-            this.PassRule5 = false;
-            return this.text;
-          }
-          this.PassRule5 = true;
+      tooltipText: "",
+      passwordValidationStatus: {
+        required: false,
+        hasUppercase: false,
+        hasLowercase: false,
+        hasNumber: false,
+        hasSpecialChar: false,
+        minLength: false,
+      },
+      passwordValidationRules: [
+        {
+          message: "Password is required",
+          isValid: false,
+          validator: this.validateRequired,
+        },
+        {
+          message: "Password must contain at least one uppercase letter",
+          isValid: false,
+          validator: this.validateUppercase,
+        },
+        {
+          message: "Password must contain at least one lowercase letter",
+          isValid: false,
+          validator: this.validateLowercase,
+        },
+        {
+          message: "Password must contain at least one number",
+          isValid: false,
+          validator: this.validateNumber,
+        },
+        {
+          message: "Password must contain at least one special character",
+          isValid: false,
+          validator: this.validateSpecialChar,
+        },
+        {
+          message: "Password must be at least 8 characters long",
+          isValid: false,
+          validator: this.validateMinLength,
         },
       ],
     };
@@ -405,6 +339,45 @@ export default {
         console.log("Form validation failed.");
       }
     },
+    validatePassword(value) {
+      // Run all validation rules and update the status
+      this.passwordValidationRules.forEach((rule) => {
+        rule.isValid = rule.validator(value);
+      });
+
+      // Find the first invalid rule, if any
+      const invalidRule = this.passwordValidationRules.find(
+        (rule) => !rule.isValid
+      );
+
+      // Update the tooltip text and return the appropriate validation message
+      if (invalidRule) {
+        this.tooltipText = invalidRule.message;
+        return invalidRule.message;
+      } else {
+        this.tooltipText = "Password meets all requirements";
+        return true;
+      }
+    },
+
+    validateRequired(value) {
+      return !!value;
+    },
+    validateUppercase(value) {
+      return /[A-Z]/.test(value);
+    },
+    validateLowercase(value) {
+      return /[a-z]/.test(value);
+    },
+    validateNumber(value) {
+      return /[0-9]/.test(value);
+    },
+    validateSpecialChar(value) {
+      return /[@$!%*?&#]/.test(value);
+    },
+    validateMinLength(value) {
+      return value.length >= 8;
+    },
   },
   mounted() {
     this.NotVerified();
@@ -412,12 +385,17 @@ export default {
     this.fetchCountry();
   },
   watch: {
+    "user.password"(newPassword) {
+      // Update the validation status when the password changes
+      this.validatePassword(newPassword);
+    },
     "user.country"(newCountry) {
       const selectedCountry = this.CountryName.find(
         (country) => country.name === newCountry
       );
       if (selectedCountry) {
-        this.user.countryCode = selectedCountry.phone;
+        this.user.countryCode = "+" + selectedCountry.phone;
+        this.user.keyCode = selectedCountry.keyCode;
       }
     },
   },
