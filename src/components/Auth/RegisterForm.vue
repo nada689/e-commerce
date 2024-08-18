@@ -24,9 +24,6 @@
                   required
                   variant="outlined"
                 >
-                  <!-- <template v-slot:prepend>
-                    
-                  </template> -->
                 </v-select>
               </template>
             </v-tooltip>
@@ -34,29 +31,22 @@
         </v-row>
         <!-- Trade Role -->
         <v-row>
-          <v-col
-            cols="3"
-            class="d-flex align-center justify-center text-center"
+          <v-col cols="12" xs="10" sm="3" md="3" lg="3" xl="3">
+            <p style="text-align: start !important">
+              Please select trade role <span class="text-third">*</span> :
+            </p>
+          </v-col>
+          <v-radio-group
+            v-model="user.tradeRole"
+            required
+            :rules="[(v) => !!v || 'Please select a trade role']"
           >
-            <span
-              >Please select trade role
-              <span class="text-third">*</span> :</span
-            >
-          </v-col>
-          <v-col>
-            <v-radio-group
-              class="radio"
-              v-model="user.tradeRole"
-              required
-              :rules="[(v) => !!v || 'Please select a trade role']"
-            >
-              <div class="flex space-x-4">
-                <v-radio label="Buyer" value="1"></v-radio>
-                <v-radio label="Seller" value="2"></v-radio>
-                <v-radio label="Both" value="3"></v-radio>
-              </div>
-            </v-radio-group>
-          </v-col>
+            <div class="flex space-x-4">
+              <v-radio label="Buyer" value="1"></v-radio>
+              <v-radio label="Seller" value="2"></v-radio>
+              <v-radio label="Both" value="3"></v-radio>
+            </div>
+          </v-radio-group>
         </v-row>
         <!-- Email -->
         <v-row>
@@ -84,8 +74,6 @@
                   required
                   v-bind="props"
                 >
-                  <!-- <template v-slot:prepend>
-                  </template> -->
                 </v-text-field>
               </template>
             </v-tooltip>
@@ -113,9 +101,6 @@
                       v-bind="mergeProps(menu, tooltip)"
                       required
                     >
-                      <!-- <template v-slot:prepend>
-
-                      </template> -->
                     </v-text-field>
                   </template>
                 </v-tooltip>
@@ -165,9 +150,6 @@
                   ]"
                   required
                 >
-                  <!-- <template v-slot:prepend>
-
-              </template> -->
                 </v-text-field>
               </template>
             </v-tooltip>
@@ -192,8 +174,6 @@
                   required
                   v-bind="props"
                 >
-                  <!-- <template v-slot:prepend>
-              </template> -->
                 </v-text-field>
               </template>
             </v-tooltip>
@@ -207,48 +187,44 @@
           >
             <span>Full name <span class="text-third">*</span> :</span>
           </v-col>
-          <v-col cols="9" class="flex align-cente">
-            <v-col cols="6">
-              <v-tooltip text="Please enter your first name" location="top">
-                <template v-slot:activator="{ props }">
-                  <v-text-field
-                    v-model="user.firstName"
-                    variant="outlined"
-                    placeholder="Please enter your first name"
-                    :rules="[
-                      (v) => !!v || 'First Name is required',
-                      (v) =>
-                        /^[A-Za-z\s]+$/.test(v) ||
-                        'First Name must contain only alphabetic characters',
-                    ]"
-                    required
-                    v-bind="props"
-                  >
-                    <!-- <template v-slot:prepend>
-                  </template> -->
-                  </v-text-field>
-                </template>
-              </v-tooltip>
-            </v-col>
-            <v-col cols="6">
-              <v-tooltip text="Please enter your last name" location="top">
-                <template v-slot:activator="{ props }">
-                  <v-text-field
-                    v-model="user.lastName"
-                    variant="outlined"
-                    v-bind="props"
-                    placeholder="Please enter your last name"
-                    :rules="[
-                      (v) => !!v || 'Last Name is required',
-                      (v) =>
-                        /^[A-Za-z\s]+$/.test(v) ||
-                        'Last Name must contain only alphabetic characters',
-                    ]"
-                    required
-                  ></v-text-field>
-                </template>
-              </v-tooltip>
-            </v-col>
+          <v-col cols="4">
+            <v-tooltip text="Please enter your first name" location="top">
+              <template v-slot:activator="{ props }">
+                <v-text-field
+                  v-model="user.firstName"
+                  variant="outlined"
+                  placeholder="Please enter your first name"
+                  :rules="[
+                    (v) => !!v || 'First Name is required',
+                    (v) =>
+                      /^[A-Za-z\s]+$/.test(v) ||
+                      'First Name must contain only alphabetic characters',
+                  ]"
+                  required
+                  v-bind="props"
+                >
+                </v-text-field>
+              </template>
+            </v-tooltip>
+          </v-col>
+          <v-col cols="5">
+            <v-tooltip text="Please enter your last name" location="top">
+              <template v-slot:activator="{ props }">
+                <v-text-field
+                  v-model="user.lastName"
+                  variant="outlined"
+                  v-bind="props"
+                  placeholder="Please enter your last name"
+                  :rules="[
+                    (v) => !!v || 'Last Name is required',
+                    (v) =>
+                      /^[A-Za-z\s]+$/.test(v) ||
+                      'Last Name must contain only alphabetic characters',
+                  ]"
+                  required
+                ></v-text-field>
+              </template>
+            </v-tooltip>
           </v-col>
         </v-row>
 
@@ -260,48 +236,44 @@
           >
             <span>Phone Number <span class="text-third">*</span> :</span>
           </v-col>
-          <v-col cols="9" class="flex align-center">
-            <v-col cols="3" sm="3" md="3" lg="3" xs="12">
-              <v-text-field
-                variant="outlined"
-                v-model="user.countryCode"
-                placeholder="Country Code"
-                required
-                :rules="[
-                  (v) => !!v || 'Country Code is required',
-                  (v) => /^\+/.test(v) || 'Please enter a valid Country Code',
-                ]"
-              >
-                <!-- <template v-slot:prepend>
-              </template> -->
-              </v-text-field>
-            </v-col>
+          <v-col cols="3" sm="3" md="3" lg="3" xs="12">
+            <v-text-field
+              variant="outlined"
+              v-model="user.countryCode"
+              placeholder="Country Code"
+              required
+              :rules="[
+                (v) => !!v || 'Country Code is required',
+                (v) => /^\+/.test(v) || 'Please enter a valid Country Code',
+              ]"
+            >
+            </v-text-field>
+          </v-col>
 
-            <v-col cols="7" sm="7" md="7" lg="7" xs="12">
-              <input type="hidden" v-model="user.keyCode" />
-              <v-tooltip text="Phone Number is required" location="top">
-                <template v-slot:activator="{ props }">
-                  <v-text-field
-                    v-model="user.phoneNumber"
-                    variant="outlined"
-                    placeholder="Phone Number"
-                    v-bind="props"
-                    :rules="[(v) => !!v || 'Phone Number is required']"
-                    required
-                  ></v-text-field>
-                </template>
-              </v-tooltip>
-            </v-col>
+          <v-col cols="6" sm="6" md="6" lg="6" xs="12">
+            <input type="hidden" v-model="user.keyCode" />
+            <v-tooltip text="Phone Number is required" location="top">
+              <template v-slot:activator="{ props }">
+                <v-text-field
+                  v-model="user.phoneNumber"
+                  variant="outlined"
+                  placeholder="Phone Number"
+                  v-bind="props"
+                  :rules="[(v) => !!v || 'Phone Number is required']"
+                  required
+                ></v-text-field>
+              </template>
+            </v-tooltip>
           </v-col>
         </v-row>
         <v-row justify="center">
-          <v-col cols="6">
+          <v-col cols="12" sm="6" md="6" lg="6" xs="12">
             <button-verify />
           </v-col>
         </v-row>
         <!-- Agreement Checkbox -->
         <v-row justify="center">
-          <v-col cols="6">
+          <v-col cols="12" sm="6" md="6" lg="6" xs="12">
             <v-checkbox
               class="mt-4"
               v-model="user.agree"
@@ -473,12 +445,6 @@ export default {
 @media (max-width: 700px) {
   .v-form {
     width: 90% !important;
-  }
-}
-@media (max-width: 500px) {
-  .radio {
-    display: flex !important;
-    flex-direction: column !important;
   }
 }
 @media (min-width: 700px) and (max-width: 950px) {

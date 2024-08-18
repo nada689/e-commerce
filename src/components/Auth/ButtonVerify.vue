@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center h-full w-10/12">
+  <div class="flex justify-center items-center h-full w-full">
     <v-row>
       <v-col>
         <div
