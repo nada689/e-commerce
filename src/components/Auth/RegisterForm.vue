@@ -1,265 +1,333 @@
 <template>
-  <v-form ref="form" class="w-1/2 m-auto py-5">
-    <div class="text-center" justify="end">
-      <!-- Country/Region -->
-      <div>
-        <v-tooltip :text="user.country" location="top">
-          <template v-slot:activator="{ props }">
-            <v-select
-              v-model="user.country"
-              :items="CountryName"
-              item-title="name"
-              item-value="name"
-              v-bind="props"
-              placeholder="Select a country"
-              :rules="[(v) => !!v || 'Country / Region is required']"
-              required
-              variant="outlined"
-            >
-              <template v-slot:prepend>
-                <span
-                  >Country / Region <span class="text-third">*</span> :</span
+  <v-form ref="form" class="w-2/3 m-auto py-5">
+    <row>
+      <v-col class="text-center" justify="end">
+        <!-- Country/Region -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
+          >
+            <span>Country / Region <span class="text-third">*</span> :</span>
+          </v-col>
+          <v-col cols="9" justify="space-between">
+            <v-tooltip :text="user.country" location="top">
+              <template v-slot:activator="{ props }">
+                <v-select
+                  v-model="user.country"
+                  :items="CountryName"
+                  item-title="name"
+                  item-value="name"
+                  v-bind="props"
+                  placeholder="Select a country"
+                  :rules="[(v) => !!v || 'Country / Region is required']"
+                  required
+                  variant="outlined"
                 >
+                  <!-- <template v-slot:prepend>
+                    
+                  </template> -->
+                </v-select>
               </template>
-            </v-select>
-          </template>
-        </v-tooltip>
-      </div>
-      <!-- Trade Role -->
-      <v-row>
-        <v-radio-group
-          class="radio"
-          v-model="user.tradeRole"
-          required
-          :rules="[(v) => !!v || 'Please select a trade role']"
-        >
-          <template v-slot:prepend>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+        <!-- Trade Role -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
+          >
             <span
               >Please select trade role
               <span class="text-third">*</span> :</span
             >
-          </template>
-          <div class="flex space-x-4">
-            <v-radio label="Buyer" value="1"></v-radio>
-            <v-radio label="Seller" value="2"></v-radio>
-            <v-radio label="Both" value="3"></v-radio>
-          </div>
-        </v-radio-group>
-      </v-row>
-
-      <!-- Email -->
-      <v-tooltip text="Please set the email as the login name" location="top">
-        <template v-slot:activator="{ props }">
-          <v-text-field
-            v-model="user.email"
-            variant="outlined"
-            type="email"
-            placeholder="Please set the email as the login name"
-            :rules="[
-              (v) => !!v || 'Email is required',
-              (v) => /.+@.+/.test(v) || 'Email must be valid',
-            ]"
-            required
-            v-bind="props"
+          </v-col>
+          <v-col>
+            <v-radio-group
+              class="radio"
+              v-model="user.tradeRole"
+              required
+              :rules="[(v) => !!v || 'Please select a trade role']"
+            >
+              <div class="flex space-x-4">
+                <v-radio label="Buyer" value="1"></v-radio>
+                <v-radio label="Seller" value="2"></v-radio>
+                <v-radio label="Both" value="3"></v-radio>
+              </div>
+            </v-radio-group>
+          </v-col>
+        </v-row>
+        <!-- Email -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
           >
-            <template v-slot:prepend>
-              <span>Email <span class="text-third">*</span> :</span>
-            </template>
-          </v-text-field>
-        </template>
-      </v-tooltip>
-      <!-- Password Input Field with Validation Rules -->
-      <v-menu open-on-hover location="right" offset-x>
-        <template v-slot:activator="{ props: menu }">
-          <v-tooltip :text="tooltipText" location="top">
-            <template v-slot:activator="{ props: tooltip }">
-              <v-text-field
-                v-model="user.password"
-                type="password"
-                variant="outlined"
-                placeholder="Set the login password"
-                :rules="[validatePassword]"
-                v-bind="mergeProps(menu, tooltip)"
-                required
-              >
-                <template v-slot:prepend>
-                  <span>
-                    Login Password <span class="text-third">*</span> :
-                  </span>
+            <span>Email <span class="text-third">*</span> :</span>
+          </v-col>
+          <v-col>
+            <v-tooltip
+              text="Please set the email as the login name"
+              location="top"
+            >
+              <template v-slot:activator="{ props }">
+                <v-text-field
+                  v-model="user.email"
+                  variant="outlined"
+                  type="email"
+                  placeholder="Please set the email as the login name"
+                  :rules="[
+                    (v) => !!v || 'Email is required',
+                    (v) => /.+@.+/.test(v) || 'Email must be valid',
+                  ]"
+                  required
+                  v-bind="props"
+                >
+                  <!-- <template v-slot:prepend>
+                  </template> -->
+                </v-text-field>
+              </template>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+        <!-- Password Input Field with Validation Rules -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
+          >
+            <span> Login Password <span class="text-third">*</span> : </span>
+          </v-col>
+          <v-col>
+            <v-menu open-on-hover location="right" offset-x>
+              <template v-slot:activator="{ props: menu }">
+                <v-tooltip :text="tooltipText" location="top">
+                  <template v-slot:activator="{ props: tooltip }">
+                    <v-text-field
+                      v-model="user.password"
+                      type="password"
+                      variant="outlined"
+                      placeholder="Set the login password"
+                      :rules="[validatePassword]"
+                      v-bind="mergeProps(menu, tooltip)"
+                      required
+                    >
+                      <!-- <template v-slot:prepend>
+
+                      </template> -->
+                    </v-text-field>
+                  </template>
+                </v-tooltip>
+              </template>
+
+              <!-- Password Validation Rules List -->
+              <v-list>
+                <v-list-item
+                  v-for="(rule, index) in passwordValidationRules"
+                  :key="index"
+                >
+                  <v-list-item-title>
+                    <v-icon :color="rule.isValid ? 'green' : 'red'">
+                      {{
+                        rule.isValid
+                          ? "mdi-checkbox-marked-circle-outline"
+                          : "mdi-alpha-x-circle-outline"
+                      }}
+                    </v-icon>
+                    {{ rule.message }}
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-col>
+        </v-row>
+        <!-- Confirm Password -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
+          >
+            <span>Confirm Password <span class="text-third">*</span> :</span>
+          </v-col>
+          <v-col>
+            <v-tooltip text="Enter the login password again" location="top">
+              <template v-slot:activator="{ props }">
+                <v-text-field
+                  v-model="user.confirmPassword"
+                  variant="outlined"
+                  type="password"
+                  v-bind="props"
+                  placeholder="Enter the login password again"
+                  :rules="[
+                    (v) => !!v || 'Confirm Password is required',
+                    (v) => v === user.password || 'Passwords must match',
+                  ]"
+                  required
+                >
+                  <!-- <template v-slot:prepend>
+
+              </template> -->
+                </v-text-field>
+              </template>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+        <!-- Company Name -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
+          >
+            <span>Company Name <span class="text-third">*</span> :</span>
+          </v-col>
+          <v-col align="center">
+            <v-tooltip text="Please enter your company name" location="top">
+              <template v-slot:activator="{ props }">
+                <v-text-field
+                  v-model="user.companyName"
+                  variant="outlined"
+                  placeholder="Please enter your company name"
+                  :rules="[(v) => !!v || 'Company Name is required']"
+                  required
+                  v-bind="props"
+                >
+                  <!-- <template v-slot:prepend>
+              </template> -->
+                </v-text-field>
+              </template>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+        <!-- Full Name -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
+          >
+            <span>Full name <span class="text-third">*</span> :</span>
+          </v-col>
+          <v-col cols="9" class="flex align-cente">
+            <v-col cols="6">
+              <v-tooltip text="Please enter your first name" location="top">
+                <template v-slot:activator="{ props }">
+                  <v-text-field
+                    v-model="user.firstName"
+                    variant="outlined"
+                    placeholder="Please enter your first name"
+                    :rules="[
+                      (v) => !!v || 'First Name is required',
+                      (v) =>
+                        /^[A-Za-z\s]+$/.test(v) ||
+                        'First Name must contain only alphabetic characters',
+                    ]"
+                    required
+                    v-bind="props"
+                  >
+                    <!-- <template v-slot:prepend>
+                  </template> -->
+                  </v-text-field>
                 </template>
-              </v-text-field>
-            </template>
-          </v-tooltip>
-        </template>
-
-        <!-- Password Validation Rules List -->
-        <v-list>
-          <v-list-item
-            v-for="(rule, index) in passwordValidationRules"
-            :key="index"
-          >
-            <v-list-item-title>
-              <v-icon :color="rule.isValid ? 'green' : 'red'">
-                {{
-                  rule.isValid
-                    ? "mdi-checkbox-marked-circle-outline"
-                    : "mdi-alpha-x-circle-outline"
-                }}
-              </v-icon>
-              {{ rule.message }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-
-      <!-- Confirm Password -->
-      <v-tooltip text="Enter the login password again" location="top">
-        <template v-slot:activator="{ props }">
-          <v-text-field
-            v-model="user.confirmPassword"
-            variant="outlined"
-            type="password"
-            v-bind="props"
-            placeholder="Enter the login password again"
-            :rules="[
-              (v) => !!v || 'Confirm Password is required',
-              (v) => v === user.password || 'Passwords must match',
-            ]"
-            required
-          >
-            <template v-slot:prepend>
-              <span>Confirm Password <span class="text-third">*</span> :</span>
-            </template>
-          </v-text-field>
-        </template>
-      </v-tooltip>
-
-      <!-- Company Name -->
-      <v-tooltip text="Please enter your company name" location="top">
-        <template v-slot:activator="{ props }">
-          <v-text-field
-            v-model="user.companyName"
-            variant="outlined"
-            placeholder="Please enter your company name"
-            :rules="[(v) => !!v || 'Company Name is required']"
-            required
-            v-bind="props"
-          >
-            <template v-slot:prepend>
-              <span>Company Name <span class="text-third">*</span> :</span>
-            </template>
-          </v-text-field>
-        </template>
-      </v-tooltip>
-
-      <!-- Full Name -->
-      <v-row>
-        <v-col cols="7">
-          <v-tooltip text="Please enter your first name" location="top">
-            <template v-slot:activator="{ props }">
-              <v-text-field
-                v-model="user.firstName"
-                variant="outlined"
-                placeholder="Please enter your first name"
-                :rules="[
-                  (v) => !!v || 'First Name is required',
-                  (v) =>
-                    /^[A-Za-z\s]+$/.test(v) ||
-                    'First Name must contain only alphabetic characters',
-                ]"
-                required
-                v-bind="props"
-              >
-                <template v-slot:prepend>
-                  <span>Full name <span class="text-third">*</span> :</span>
+              </v-tooltip>
+            </v-col>
+            <v-col cols="6">
+              <v-tooltip text="Please enter your last name" location="top">
+                <template v-slot:activator="{ props }">
+                  <v-text-field
+                    v-model="user.lastName"
+                    variant="outlined"
+                    v-bind="props"
+                    placeholder="Please enter your last name"
+                    :rules="[
+                      (v) => !!v || 'Last Name is required',
+                      (v) =>
+                        /^[A-Za-z\s]+$/.test(v) ||
+                        'Last Name must contain only alphabetic characters',
+                    ]"
+                    required
+                  ></v-text-field>
                 </template>
-              </v-text-field>
-            </template>
-          </v-tooltip>
-        </v-col>
-        <v-col cols="5">
-          <v-tooltip text="Please enter your last name" location="top">
-            <template v-slot:activator="{ props }">
-              <v-text-field
-                v-model="user.lastName"
-                variant="outlined"
-                v-bind="props"
-                placeholder="Please enter your last name"
-                :rules="[
-                  (v) => !!v || 'Last Name is required',
-                  (v) =>
-                    /^[A-Za-z\s]+$/.test(v) ||
-                    'Last Name must contain only alphabetic characters',
-                ]"
-                required
-              ></v-text-field>
-            </template>
-          </v-tooltip>
-        </v-col>
-      </v-row>
+              </v-tooltip>
+            </v-col>
+          </v-col>
+        </v-row>
 
-      <!-- Phone Number -->
-      <v-row>
-        <v-col cols="12" sm="5" md="5" lg="5" xs="12">
-          <v-text-field
-            variant="outlined"
-            v-model="user.countryCode"
-            placeholder="Country Code"
-            required
-            :rules="[
-              (v) => !!v || 'Country Code is required',
-              (v) => /^\+/.test(v) || 'Please enter a valid Country Code',
-            ]"
+        <!-- Phone Number -->
+        <v-row>
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-center text-center"
           >
-            <template v-slot:prepend>
-              <span>Phone Number <span class="text-third">*</span> :</span>
-            </template>
-          </v-text-field>
-        </v-col>
-
-        <v-col cols="12" sm="7" md="7" lg="7" xs="12">
-          <input type="hidden" v-model="user.keyCode" />
-          <v-tooltip text="Phone Number is required" location="top">
-            <template v-slot:activator="{ props }">
+            <span>Phone Number <span class="text-third">*</span> :</span>
+          </v-col>
+          <v-col cols="9" class="flex align-center">
+            <v-col cols="3" sm="3" md="3" lg="3" xs="12">
               <v-text-field
-                v-model="user.phoneNumber"
                 variant="outlined"
-                placeholder="Phone Number"
-                v-bind="props"
-                :rules="[(v) => !!v || 'Phone Number is required']"
+                v-model="user.countryCode"
+                placeholder="Country Code"
                 required
-              ></v-text-field>
-            </template>
-          </v-tooltip>
-        </v-col>
-      </v-row>
+                :rules="[
+                  (v) => !!v || 'Country Code is required',
+                  (v) => /^\+/.test(v) || 'Please enter a valid Country Code',
+                ]"
+              >
+                <!-- <template v-slot:prepend>
+              </template> -->
+              </v-text-field>
+            </v-col>
 
-      <button-verify />
-
-      <!-- Agreement Checkbox -->
-      <v-checkbox
-        class="mt-4"
-        v-model="user.agree"
-        :rules="[(v) => !!v || 'You must agree to continue!']"
-        required
-      >
-        <template v-slot:label>
-          <span>
-            I agree to (a)<span class="text-main font-bold"
-              >Free Membership Agreement</span
-            >, (b) <span class="text-main font-bold">Terms of Use</span>, and
-            (c) <span class="text-main font-bold">Privacy Policy</span>. I agree
-            to receive more information from Alibaba.com about its products and
-            services.
-          </span>
-        </template>
-      </v-checkbox>
-
-      <!-- Register Button -->
-      <v-btn @click="submit" class="text-white bg-black hover:bg-gray-800">
-        Agree and Register
-      </v-btn>
-    </div>
+            <v-col cols="7" sm="7" md="7" lg="7" xs="12">
+              <input type="hidden" v-model="user.keyCode" />
+              <v-tooltip text="Phone Number is required" location="top">
+                <template v-slot:activator="{ props }">
+                  <v-text-field
+                    v-model="user.phoneNumber"
+                    variant="outlined"
+                    placeholder="Phone Number"
+                    v-bind="props"
+                    :rules="[(v) => !!v || 'Phone Number is required']"
+                    required
+                  ></v-text-field>
+                </template>
+              </v-tooltip>
+            </v-col>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col cols="6">
+            <button-verify />
+          </v-col>
+        </v-row>
+        <!-- Agreement Checkbox -->
+        <v-row justify="center">
+          <v-col cols="6">
+            <v-checkbox
+              class="mt-4"
+              v-model="user.agree"
+              :rules="[(v) => !!v || 'You must agree to continue!']"
+              required
+            >
+              <template v-slot:label>
+                <span>
+                  I agree to (a)<span class="text-main font-bold"
+                    >Free Membership Agreement</span
+                  >, (b) <span class="text-main font-bold">Terms of Use</span>,
+                  and (c)
+                  <span class="text-main font-bold">Privacy Policy</span>. I
+                  agree to receive more information from Alibaba.com about its
+                  products and services.
+                </span>
+              </template>
+            </v-checkbox>
+          </v-col>
+        </v-row>
+        <!-- Register Button -->
+        <v-btn @click="submit" class="text-white bg-black hover:bg-gray-800">
+          Agree and Register
+        </v-btn>
+      </v-col>
+    </row>
   </v-form>
 </template>
 
